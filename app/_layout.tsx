@@ -64,7 +64,7 @@ function RootLayoutNav() {
           },
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
-              <Ionicons name="close-outline" size={28} />
+              <Ionicons name="close-outline" size={28} color="#C5A500" />
             </TouchableOpacity>
           ),
         }}

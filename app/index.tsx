@@ -1,23 +1,43 @@
-import { StyleSheet, Text, View } from "react-native";
-// import AnimatedIntro from "@/components/AnimatedIntro";
 import BottomLoginSheet from "@/components/BottomLoginSheet";
+import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
   return (
     <LinearGradient
-      colors={["#0f2027", "#203a43", "#2c5364"]}
+      colors={["#0f0f0f", "#1c1c1c", "#000000"]} // black gradient
       style={styles.container}
     >
-      <View style={styles.content}>
+      {/* App Title */}
+      <View style={styles.header}>
+        <Ionicons name="wallet-outline" size={72} color="#FFD700" />
         <Text style={styles.title}>Expense Tracker</Text>
         <Text style={styles.subtitle}>
-          Track your spending, save more, and stay in control.
+          Manage money with style
         </Text>
       </View>
 
-      {/* <AnimatedIntro /> */}
-      <BottomLoginSheet />
+      {/* Feature Icons */}
+      <View style={styles.features}>
+        <View style={styles.featureItem}>
+          <Ionicons name="trending-up-outline" size={40} color="#FFD700" />
+          <Text style={styles.featureText}>Insights</Text>
+        </View>
+        <View style={styles.featureItem}>
+          <Ionicons name="card-outline" size={40} color="#FFD700" />
+          <Text style={styles.featureText}>Budget</Text>
+        </View>
+        <View style={styles.featureItem}>
+          <Ionicons name="stats-chart-outline" size={40} color="#FFD700" />
+          <Text style={styles.featureText}>Reports</Text>
+        </View>
+      </View>
+
+      {/* Login/Register Buttons */}
+      <View style={styles.bottomSheet}>
+        <BottomLoginSheet />
+      </View>
     </LinearGradient>
   );
 }
@@ -26,22 +46,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  content: {
-    flex: 1,
-    justifyContent: "center",
+  header: {
+    marginTop: 100,
     alignItems: "center",
-    paddingHorizontal: 30,
   },
   title: {
-    fontSize: 36,
+    fontSize: 38,
     fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 10,
-    textAlign: "center",
+    color: "#FFD700",
+    marginTop: 10,
   },
   subtitle: {
     fontSize: 16,
-    color: "#ddd",
-    textAlign: "center",
+    color: "#d4af37",
+    marginTop: 5,
+  },
+  features: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 60,
+    paddingHorizontal: 20,
+  },
+  featureItem: {
+    alignItems: "center",
+  },
+  featureText: {
+    marginTop: 8,
+    fontSize: 15,
+    color: "#FFD700",
+    fontWeight: "500",
+  },
+  bottomSheet: {
+    flex: 1,
+    justifyContent: "flex-end",
   },
 });

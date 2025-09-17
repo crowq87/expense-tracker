@@ -1,4 +1,3 @@
-import { Ionicons } from '@expo/vector-icons'
 import { Link } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
@@ -15,8 +14,7 @@ const BottomLoginSheet = () => {
         asChild
       >
         <TouchableOpacity style={styles.btnDark}>
-          <Ionicons name="mail" size={20} color="#fff" style={styles.btnIcon} />
-          <Text style={styles.btnDarkText}>Continue with Email</Text>
+          <Text style={styles.btnDarkText}>Sign In</Text>
         </TouchableOpacity>
       </Link>
 
@@ -39,23 +37,23 @@ const BottomLoginSheet = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center', // center vertically
-    alignItems: 'center', // center horizontally
+    justifyContent: 'center',
+    alignItems: 'center',
    
     padding: 28,
-    gap: 20, // space between buttons
+    gap: 20,
   },
   btnDark: {
-    flexDirection: 'row', // ✅ icon + text side by side
+    flexDirection: 'row', 
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#333',
+    backgroundColor: '#1c1c1c',
     width: '80%',
-    height: 50, // ✅ same height
+    height: 50, 
     borderRadius: 12,
   },
   btnIcon: {
-    marginRight: 8, // spacing between icon and text
+    marginRight: 8, 
   },
   btnDarkText: {
     color: '#fff',
