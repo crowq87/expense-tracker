@@ -5,6 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const BottomLoginSheet = () => {
   return (
+    
     <View style={styles.container}>
       <Link
         href={{
@@ -31,6 +32,7 @@ const BottomLoginSheet = () => {
         </TouchableOpacity>
       </Link>
     </View>
+    
   )
 }
 
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center', // center vertically
     alignItems: 'center', // center horizontally
-    backgroundColor: '#000',
+   
     padding: 28,
     gap: 20, // space between buttons
   },
