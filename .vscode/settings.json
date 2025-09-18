@@ -3,8 +3,12 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
+<<<<<<< HEAD
   },
   "cSpell.words": [
     "Firestore"
   ]
+=======
+  }
+>>>>>>> 19fe5090487c500cfdcc5c9f24cc4aed9c280cb2
 }
