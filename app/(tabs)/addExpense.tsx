@@ -1,10 +1,13 @@
-import { db, FIREBASE_AUTH } from '@/FirebaseConfig';
+import { db, FIREBASE_AUTH } from "@/FirebaseConfig";
+import { useNavigation } from "@react-navigation/native";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React from "react";
 import { Alert, SafeAreaView, StyleSheet } from "react-native";
 import ExpenseForm from "../../components/ExpenseForm";
 
-export default function AddExpense({ navigation }) {
+export default function AddExpense() {
+  const navigation = useNavigation();
+
   const handleSubmit = async (expenseData: { description: string; amount: number }) => {
     try {
       const user = FIREBASE_AUTH.currentUser;
@@ -16,11 +19,11 @@ export default function AddExpense({ navigation }) {
         createdAt: serverTimestamp(),
       });
 
-      Alert.alert("Expense added!");
+      Alert.alert("✅ Expense added!");
       navigation.goBack();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      Alert.alert("Failed to add expense", error.message);
+      Alert.alert("❌ Failed to add expense", error.message);
     }
   };
 
@@ -32,5 +35,5 @@ export default function AddExpense({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#f5f5f5" },
+  container: { flex: 1, backgroundColor: "#1c1c1c" },
 });

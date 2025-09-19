@@ -1,6 +1,7 @@
 import BottomLoginSheet from "@/components/BottomLoginSheet";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Index() {

@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
 export {

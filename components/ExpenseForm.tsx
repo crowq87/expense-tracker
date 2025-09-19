@@ -1,65 +1,80 @@
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-type ExpenseFormProps = {
-  onSubmit: (data: { description: string; amount: number }) => void;
+interface ExpenseFormProps {
+  onSubmit: (expenseData: { description: string; amount: number }) => void;
   buttonText: string;
-};
+}
 
 export default function ExpenseForm({ onSubmit, buttonText }: ExpenseFormProps) {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
 
-  const handleSubmit = () => {
-    if (!description || !amount) {
-      Alert.alert("Please fill out all fields.");
-      return;
-    }
-
-    const parsedAmount = parseFloat(amount);
-    if (isNaN(parsedAmount) || parsedAmount <= 0) {
-      Alert.alert("Please enter a valid amount.");
-      return;
-    }
-
-    onSubmit({ description, amount: parsedAmount });
-
+  const handlePress = () => {
+    if (!description.trim() || !amount) return;
+    onSubmit({ description, amount: parseFloat(amount) });
     setDescription("");
     setAmount("");
   };
 
   return (
-    <View style={styles.form}>
+    <View style={styles.container}>
+      <Text style={styles.label}>Description</Text>
       <TextInput
-        placeholder="Description"
+        style={styles.input}
         value={description}
         onChangeText={setDescription}
-        style={styles.input}
+        placeholder="Enter description"
+        placeholderTextColor="#aaa"
       />
+
+      <Text style={styles.label}>Amount</Text>
       <TextInput
-        placeholder="Amount"
+        style={styles.input}
         value={amount}
         onChangeText={setAmount}
-        style={styles.input}
         keyboardType="numeric"
+        placeholder="Enter amount"
+        placeholderTextColor="#aaa"
       />
-      <Button title={buttonText} onPress={handleSubmit} />
+
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  form: {
+  container: {
     padding: 20,
-    backgroundColor: "#fff",
-    margin: 20,
-    borderRadius: 10,
+    backgroundColor: "#1c1c1c",
+    flex: 1,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 5,
+    color: "#FFD700",
   },
   input: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    backgroundColor: "#2c2c2c",
+    borderRadius: 8,
+    padding: 12,
     marginBottom: 15,
+    color: "#fff",
+    fontSize: 16,
+  },
+  button: {
+    backgroundColor: "#FFD700",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  buttonText: {
     fontSize: 18,
-    paddingVertical: 8,
+    fontWeight: "bold",
+    color: "#000", // black on gold
   },
 });

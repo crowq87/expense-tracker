@@ -3,29 +3,38 @@ import { FIREBASE_AUTH } from '@/FirebaseConfig';
 import { router } from 'expo-router';
 import { getAuth } from 'firebase/auth';
 import React from 'react';
-import { Button, StyleSheet } from 'react-native';
-
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function TabTwoScreen() {
+  const [isLoading, setIsLoading] = React.useState(true);
 
-const [isLoading, setIsLoading] = React.useState(true);
+  React.useEffect(() => {
+    const unsubscribe = getAuth().onAuthStateChanged((user) => {
+      setIsLoading(false);
+      if (!user) {
+        router.replace("/login");
+      }
+    });
+    return unsubscribe;
+  }, []);
 
-  getAuth().onAuthStateChanged((user) => {
-    setIsLoading(false);
-    if (!user) {
-      router.replace("/login");
-    }
-  });
-
- if (isLoading) return <Text style={{ paddingTop: 30 }}>Loading...</Text>;
+  if (isLoading) return <Text style={{ paddingTop: 30, color: "#fff" }}>Loading...</Text>;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Account Settings</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Button title="Sign Out" onPress={() => FIREBASE_AUTH.signOut()} />
-      <View style={{ height: 20 }} />
-      <Button title="Delete Account" onPress={() => FIREBASE_AUTH.currentUser?.delete()} />
+      <Text style={styles.title}>⚙️ Account Settings</Text>
+      <View style={styles.separator} />
+
+      <TouchableOpacity style={styles.button} onPress={() => FIREBASE_AUTH.signOut()}>
+        <Text style={styles.buttonText}>Sign Out</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, styles.deleteButton]}
+        onPress={() => FIREBASE_AUTH.currentUser?.delete()}
+      >
+        <Text style={[styles.buttonText, styles.deleteButtonText]}>Delete Account</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -33,16 +42,42 @@ const [isLoading, setIsLoading] = React.useState(true);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#000",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#d4af37", 
+    marginBottom: 30,
   },
   separator: {
-    marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
+    backgroundColor: "#d4af37",
+    marginBottom: 30,
+  },
+  button: {
+    width: "80%",
+    backgroundColor: "#d4af37",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: "#000",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  deleteButton: {
+    backgroundColor: "#222", 
+    borderWidth: 1,
+    borderColor: "#d4af37",
+  },
+  deleteButtonText: {
+    color: "#d4af37", 
   },
 });
